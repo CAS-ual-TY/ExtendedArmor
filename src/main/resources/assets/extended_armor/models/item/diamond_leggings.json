@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extended_armor:item/diamond_leggings",
+    "layer1": "extended_armor:item/diamond_leggings_overlay"
+  }
+}

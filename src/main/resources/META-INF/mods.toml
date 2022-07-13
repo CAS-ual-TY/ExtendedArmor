@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All rights reserved"
+
+[[mods]] #mandatory
+modId="extended_armor"
+version="${file.jarVersion}"
+displayName="Extended Armor"
+logoFile="logo.png"
+credits="Mojang and the Minecraft Forge Team"
+authors="CAS_ual_TY"
+description='''
+This mod allows you to put wool over Golden, Chainmail, Iron, Diamond and Netherite armor and color them similar to how you can color Leather armor.
+'''
