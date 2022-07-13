@@ -40,8 +40,10 @@ public class DataGen
         @Override
         protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer)
         {
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_CHESTPLATE.get()), Ingredient.of(Items.NETHERITE_INGOT), Items.NETHERITE_CHESTPLATE).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.DIAMOND_CHESTPLATE.get()) + "_smithing_2");
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_LEGGINGS.get()), Ingredient.of(Items.NETHERITE_INGOT), Items.NETHERITE_CHESTPLATE).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.DIAMOND_LEGGINGS.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_HELMET.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_HELMET.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_HELMET.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_CHESTPLATE.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_CHESTPLATE.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_CHESTPLATE.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_LEGGINGS.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_LEGGINGS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_LEGGINGS.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_BOOTS.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_BOOTS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_BOOTS.get()) + "_smithing_2");
             SpecialRecipeBuilder.special(ExtendedArmor.RECIPE_SERIALIZER.get()).save(consumer, ExtendedArmor.MOD_ID);
         }
     }
