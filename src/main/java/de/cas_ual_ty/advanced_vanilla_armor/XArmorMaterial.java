@@ -1,11 +1,12 @@
 package de.cas_ual_ty.advanced_vanilla_armor;
 
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.SoundEvent;
 
-public class XArmorMaterial implements ArmorMaterial
+public class XArmorMaterial implements IArmorMaterial
 {
     public final ArmorMaterial baseMaterial;
     
@@ -15,13 +16,13 @@ public class XArmorMaterial implements ArmorMaterial
     }
     
     @Override
-    public int getDurabilityForSlot(EquipmentSlot var)
+    public int getDurabilityForSlot(EquipmentSlotType var)
     {
         return baseMaterial.getDurabilityForSlot(var);
     }
     
     @Override
-    public int getDefenseForSlot(EquipmentSlot var)
+    public int getDefenseForSlot(EquipmentSlotType var)
     {
         return baseMaterial.getDefenseForSlot(var);
     }

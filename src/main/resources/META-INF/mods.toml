@@ -1,8 +1,7 @@
 modLoader="javafml"
-loaderVersion="[40,)"
-license="All rights reserved"
-
-[[mods]] #mandatory
+loaderVersion="[36,)"
+license="MIT License"
+[[mods]]
 modId="extended_armor"
 version="${file.jarVersion}"
 displayName="Extended Armor"

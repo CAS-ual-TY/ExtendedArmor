@@ -1,19 +1,19 @@
 package de.cas_ual_ty.advanced_vanilla_armor;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.*;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.SpecialRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.RegistryObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class XArmorRecipe extends CustomRecipe
+public class XArmorRecipe extends SpecialRecipe
 {
     public final Map<Item, DyeItem> woolDyeMap;
     
@@ -40,20 +40,22 @@ public class XArmorRecipe extends CustomRecipe
     }
     
     @Override
-    public boolean matches(CraftingContainer container, Level level)
+    public boolean matches(CraftingInventory container, World level)
     {
         if(container.getContainerSize() >= 2)
         {
             for(RegistryObject<Item> entry : ExtendedArmor.ITEMS.getEntries())
             {
-                if(entry.get() instanceof XArmorItem item)
+                if(entry.get() instanceof XArmorItem)
                 {
+                    XArmorItem item = (XArmorItem) entry.get();
+                    
                     boolean itemFound = false;
                     boolean woolFound = false;
                     
                     for(int i = 0; i < container.getContainerSize(); i++)
                     {
-                        if(container.getItem(i).is(item.PARENT))
+                        if(container.getItem(i).getItem() == item.PARENT)
                         {
                             if(itemFound)
                             {
@@ -90,20 +92,22 @@ public class XArmorRecipe extends CustomRecipe
     }
     
     @Override
-    public ItemStack assemble(CraftingContainer container)
+    public ItemStack assemble(CraftingInventory container)
     {
         if(container.getContainerSize() >= 2)
         {
             for(RegistryObject<Item> entry : ExtendedArmor.ITEMS.getEntries())
             {
-                if(entry.get() instanceof XArmorItem item)
+                if(entry.get() instanceof XArmorItem)
                 {
+                    XArmorItem item = (XArmorItem) entry.get();
+                    
                     boolean itemFound = false;
                     ItemStack wool = ItemStack.EMPTY;
                     
                     for(int i = 0; i < container.getContainerSize(); i++)
                     {
-                        if(container.getItem(i).is(item.PARENT))
+                        if(container.getItem(i).getItem() == item.PARENT)
                         {
                             itemFound = true;
                         }
@@ -132,7 +136,7 @@ public class XArmorRecipe extends CustomRecipe
                     }
                     else
                     {
-                        return DyeableLeatherItem.dyeArmor(new ItemStack(item), ImmutableList.of(dye));
+                        return IDyeableArmorItem.dyeArmor(new ItemStack(item), ImmutableList.of(dye));
                     }
                 }
             }
@@ -142,8 +146,10 @@ public class XArmorRecipe extends CustomRecipe
         {
             for(RegistryObject<Item> i : ExtendedArmor.ITEMS.getEntries())
             {
-                if(i.get() instanceof XArmorItem item)
+                if(i.get() instanceof XArmorItem)
                 {
+                    XArmorItem item = (XArmorItem) i.get();
+                    
                     ItemStack wool = ItemStack.EMPTY;
                     
                     if(woolDyeMap.containsKey(container.getItem(0).getItem()) && container.getItem(1).getItem() == item.PARENT)
@@ -160,7 +166,7 @@ public class XArmorRecipe extends CustomRecipe
                     if(!wool.isEmpty())
                     {
                         ItemStack itemStack = new ItemStack(item);
-                        DyeableLeatherItem.dyeArmor(itemStack, ImmutableList.of(woolDyeMap.get(wool.getItem())));
+                        IDyeableArmorItem.dyeArmor(itemStack, ImmutableList.of(woolDyeMap.get(wool.getItem())));
                         return itemStack;
                     }
                 }
@@ -177,7 +183,7 @@ public class XArmorRecipe extends CustomRecipe
     }
     
     @Override
-    public RecipeSerializer<?> getSerializer()
+    public IRecipeSerializer<?> getSerializer()
     {
         return ExtendedArmor.RECIPE_SERIALIZER.get();
     }
