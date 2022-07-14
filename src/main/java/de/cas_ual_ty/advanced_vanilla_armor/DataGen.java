@@ -13,9 +13,10 @@ import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Consumer;
@@ -26,8 +27,8 @@ public class DataGen
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-        event.getGenerator().addProvider(new RecipeGen(event.getGenerator()));
-        event.getGenerator().addProvider(new ItemModelGen(event.getGenerator(), ExtendedArmor.MOD_ID, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new RecipeGen(event.getGenerator()));
+        event.getGenerator().addProvider(true, new ItemModelGen(event.getGenerator(), ExtendedArmor.MOD_ID, event.getExistingFileHelper()));
     }
     
     public static class RecipeGen extends RecipeProvider
@@ -62,7 +63,7 @@ public class DataGen
             {
                 if(entry.get() instanceof XArmorItem item)
                 {
-                    layer2(item.getRegistryName());
+                    layer2(ForgeRegistries.ITEMS.getKey(item));
                 }
             }
         }

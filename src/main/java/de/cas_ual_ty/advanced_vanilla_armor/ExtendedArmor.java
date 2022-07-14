@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -64,7 +64,7 @@ public class ExtendedArmor
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
     
-    private void itemColors(ColorHandlerEvent.Item event)
+    private void itemColors(RegisterColorHandlersEvent.Item event)
     {
         ArrayList<XArmorItem> arrayList = new ArrayList<>(3 * 4);
         
@@ -76,7 +76,7 @@ public class ExtendedArmor
             }
         }
         
-        event.getItemColors().register((itemStack, color) ->
+        event.register((itemStack, color) ->
                 {
                     return color > 0 ? -1 : ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack);
                 },

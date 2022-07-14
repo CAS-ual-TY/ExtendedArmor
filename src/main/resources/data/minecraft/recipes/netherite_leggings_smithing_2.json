@@ -1,12 +1,12 @@
 {
   "type": "minecraft:smithing",
-  "base": {
-    "item": "extended_armor:diamond_chestplate"
-  },
   "addition": {
     "item": "minecraft:netherite_ingot"
   },
+  "base": {
+    "item": "extended_armor:diamond_leggings"
+  },
   "result": {
-    "item": "minecraft:netherite_chestplate"
+    "item": "extended_armor:netherite_leggings"
   }
 }
