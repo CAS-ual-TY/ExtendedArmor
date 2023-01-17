@@ -4,15 +4,14 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
-
-import java.util.ArrayList;
 
 @Mod(ExtendedArmor.MOD_ID)
 public class ExtendedArmor
@@ -59,28 +58,8 @@ public class ExtendedArmor
     
     public ExtendedArmor()
     {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::itemColors);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ColorsRegister::register);
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-    }
-    
-    private void itemColors(ColorHandlerEvent.Item event)
-    {
-        ArrayList<XArmorItem> arrayList = new ArrayList<>(3 * 4);
-        
-        for(RegistryObject<Item> entry : ExtendedArmor.ITEMS.getEntries())
-        {
-            if(entry.get() instanceof XArmorItem item)
-            {
-                arrayList.add(item);
-            }
-        }
-        
-        event.getItemColors().register((itemStack, color) ->
-                {
-                    return color > 0 ? -1 : ((DyeableLeatherItem) itemStack.getItem()).getColor(itemStack);
-                },
-                arrayList.toArray(XArmorItem[]::new)
-        );
     }
 }
