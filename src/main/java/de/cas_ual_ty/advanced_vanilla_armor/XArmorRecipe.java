@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -17,9 +18,9 @@ public class XArmorRecipe extends CustomRecipe
 {
     public final Map<Item, DyeItem> woolDyeMap;
     
-    public XArmorRecipe(ResourceLocation resourceLocation)
+    public XArmorRecipe(ResourceLocation resourceLocation, CraftingBookCategory category)
     {
-        super(resourceLocation);
+        super(resourceLocation, category);
         woolDyeMap = new HashMap<>();
         woolDyeMap.put(Blocks.WHITE_WOOL.asItem(), (DyeItem) Items.WHITE_DYE);
         woolDyeMap.put(Blocks.ORANGE_WOOL.asItem(), (DyeItem) Items.ORANGE_DYE);

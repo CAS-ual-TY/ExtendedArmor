@@ -1,10 +1,7 @@
 package de.cas_ual_ty.advanced_vanilla_armor;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SpecialRecipeBuilder;
-import net.minecraft.data.recipes.UpgradeRecipeBuilder;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -27,33 +24,33 @@ public class DataGen
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-        event.getGenerator().addProvider(true, new RecipeGen(event.getGenerator()));
-        event.getGenerator().addProvider(true, new ItemModelGen(event.getGenerator(), ExtendedArmor.MOD_ID, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new RecipeGen(event.getGenerator().getPackOutput()));
+        event.getGenerator().addProvider(true, new ItemModelGen(event.getGenerator().getPackOutput(), ExtendedArmor.MOD_ID, event.getExistingFileHelper()));
     }
     
     public static class RecipeGen extends RecipeProvider
     {
-        public RecipeGen(DataGenerator dataGen)
+        public RecipeGen(PackOutput output)
         {
-            super(dataGen);
+            super(output);
         }
         
         @Override
-        protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer)
+        protected void buildRecipes(Consumer<FinishedRecipe> consumer)
         {
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_HELMET.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_HELMET.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_HELMET.get()) + "_smithing_2");
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_CHESTPLATE.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_CHESTPLATE.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_CHESTPLATE.get()) + "_smithing_2");
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_LEGGINGS.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_LEGGINGS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_LEGGINGS.get()) + "_smithing_2");
-            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_BOOTS.get()), Ingredient.of(Items.NETHERITE_INGOT), ExtendedArmor.NETHERITE_BOOTS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_BOOTS.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_HELMET.get()), Ingredient.of(Items.NETHERITE_INGOT), RecipeCategory.COMBAT, ExtendedArmor.NETHERITE_HELMET.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_HELMET.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_CHESTPLATE.get()), Ingredient.of(Items.NETHERITE_INGOT), RecipeCategory.COMBAT, ExtendedArmor.NETHERITE_CHESTPLATE.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_CHESTPLATE.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_LEGGINGS.get()), Ingredient.of(Items.NETHERITE_INGOT), RecipeCategory.COMBAT, ExtendedArmor.NETHERITE_LEGGINGS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_LEGGINGS.get()) + "_smithing_2");
+            UpgradeRecipeBuilder.smithing(Ingredient.of(ExtendedArmor.DIAMOND_BOOTS.get()), Ingredient.of(Items.NETHERITE_INGOT), RecipeCategory.COMBAT, ExtendedArmor.NETHERITE_BOOTS.get()).unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT)).save(consumer, getItemName(ExtendedArmor.NETHERITE_BOOTS.get()) + "_smithing_2");
             SpecialRecipeBuilder.special(ExtendedArmor.RECIPE_SERIALIZER.get()).save(consumer, ExtendedArmor.MOD_ID);
         }
     }
     
     public static class ItemModelGen extends ItemModelProvider
     {
-        public ItemModelGen(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper)
+        public ItemModelGen(PackOutput output, String modid, ExistingFileHelper existingFileHelper)
         {
-            super(generator, modid, existingFileHelper);
+            super(output, modid, existingFileHelper);
         }
         
         @Override
