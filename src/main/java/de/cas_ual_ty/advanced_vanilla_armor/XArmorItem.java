@@ -14,7 +14,7 @@ public class XArmorItem extends DyeableArmorItem
     
     public XArmorItem(ArmorMaterial material, ArmorItem parent, Properties properties)
     {
-        super(material, parent.getSlot(), properties);
+        super(material, parent.getType(), properties);
         PARENT = parent;
     }
     

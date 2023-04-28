@@ -2,6 +2,7 @@ package de.cas_ual_ty.advanced_vanilla_armor;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -15,15 +16,15 @@ public class XArmorMaterial implements ArmorMaterial
     }
     
     @Override
-    public int getDurabilityForSlot(EquipmentSlot var)
+    public int getDurabilityForType(ArmorItem.Type type)
     {
-        return baseMaterial.getDurabilityForSlot(var);
+        return baseMaterial.getDurabilityForType(type);
     }
     
     @Override
-    public int getDefenseForSlot(EquipmentSlot var)
+    public int getDefenseForType(ArmorItem.Type type)
     {
-        return baseMaterial.getDefenseForSlot(var);
+        return baseMaterial.getDefenseForType(type);
     }
     
     @Override

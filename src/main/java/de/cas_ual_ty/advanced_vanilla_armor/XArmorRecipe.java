@@ -1,6 +1,7 @@
 package de.cas_ual_ty.advanced_vanilla_armor;
 
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.*;
@@ -91,7 +92,7 @@ public class XArmorRecipe extends CustomRecipe
     }
     
     @Override
-    public ItemStack assemble(CraftingContainer container)
+    public ItemStack assemble(CraftingContainer container, RegistryAccess access)
     {
         if(container.getContainerSize() >= 2)
         {
