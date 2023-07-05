@@ -5,7 +5,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -65,9 +65,9 @@ public class ExtendedArmor
         FMLJavaModLoadingContext.get().getModEventBus().addListener(ExtendedArmor::creativeModeTabs);
     }
     
-    private static void creativeModeTabs(CreativeModeTabEvent.BuildContents event)
+    private static void creativeModeTabs(BuildCreativeModeTabContentsEvent event)
     {
-        if(event.getTab() == CreativeModeTabs.COMBAT)
+        if(event.getTabKey() == CreativeModeTabs.COMBAT)
         {
             event.accept(GOLDEN_HELMET);
             event.accept(GOLDEN_CHESTPLATE);
